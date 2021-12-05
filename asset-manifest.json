@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/DRCReView/static/css/main.0d5bd0ca.chunk.css",
+    "main.js": "/DRCReView/static/js/main.bb3ddee2.chunk.js",
+    "main.js.map": "/DRCReView/static/js/main.bb3ddee2.chunk.js.map",
+    "runtime-main.js": "/DRCReView/static/js/runtime-main.a2140ea5.js",
+    "runtime-main.js.map": "/DRCReView/static/js/runtime-main.a2140ea5.js.map",
+    "static/css/2.383c0125.chunk.css": "/DRCReView/static/css/2.383c0125.chunk.css",
+    "static/js/2.c31b9bd7.chunk.js": "/DRCReView/static/js/2.c31b9bd7.chunk.js",
+    "static/js/2.c31b9bd7.chunk.js.map": "/DRCReView/static/js/2.c31b9bd7.chunk.js.map",
+    "index.html": "/DRCReView/index.html",
+    "static/css/2.383c0125.chunk.css.map": "/DRCReView/static/css/2.383c0125.chunk.css.map",
+    "static/css/main.0d5bd0ca.chunk.css.map": "/DRCReView/static/css/main.0d5bd0ca.chunk.css.map",
+    "static/js/2.c31b9bd7.chunk.js.LICENSE.txt": "/DRCReView/static/js/2.c31b9bd7.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a2140ea5.js",
+    "static/css/2.383c0125.chunk.css",
+    "static/js/2.c31b9bd7.chunk.js",
+    "static/css/main.0d5bd0ca.chunk.css",
+    "static/js/main.bb3ddee2.chunk.js"
+  ]
+}
