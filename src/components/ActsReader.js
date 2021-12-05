@@ -57,7 +57,7 @@ function ActsReader(props) {
 export default ActsReader;
 
 function loadExample(onComplete, OnError) {
-  readRemoteFile("DRCReView/bork.acts", {
+  readRemoteFile("bork.acts", {
     delimiter: " ",
     dynamicTyping: true,
     skipEmptyLines: false,
