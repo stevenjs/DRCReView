@@ -21,21 +21,35 @@ import "./App.css";
 
 const App = () => {
   const [tabKey, setTabKey] = useState("load");
-  const [actsError, setActsError] = useState({ type: undefined, row: undefined, message: undefined });
+  const [actsError, setActsError] = useState("");
   const [actsData, setActsData] = useState();
 
   const onActsFileLoad = (data) => {
+    if (data) clearActsError();
     setActsData(data);
-    setTabKey("tables");
+    setTabKey(data ? "tables" : "load");
   };
 
   const onActsFileError = (err, file, inputElem, reason) => {
-    setActsError(err);
+    if (err !== null && err !== undefined) {
+      let message = "";
+      if (typeof err.row !== "undefined") {
+        message += "Error on line #" + err.row + ((typeof err.message !== "undefined") ? ": " : "");
+      }
+      if (typeof err.message !== "undefined") {
+        message += err.message;
+      }
+      setActsError(message);
+    }
+  };
+
+  const clearActsError = () => {
+    setActsError("");
   };
 
   const onRemoveActsFile = () => {
     setActsData();
-    setActsError({});
+    clearActsError();
     setTabKey("load");
   };
 
@@ -47,9 +61,9 @@ const App = () => {
         </Container>
       </Navbar>
       <Container className="p-3">
-        {typeof actsError.type !== "undefined" ? (
-          <Alert variant="danger" onClose={() => setActsError({})} dismissible>
-            Error on line #{actsError.row}: {actsError.message}
+        {actsError !== "" ? (
+          <Alert variant="danger" onClose={() => clearActsError()} dismissible>
+            {actsError}
           </Alert>
         ) : null}
         <Tabs

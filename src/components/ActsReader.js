@@ -9,7 +9,8 @@ import Stack from "react-bootstrap/Stack";
 import { CSVReader, readRemoteFile } from "react-papaparse";
 
 function ActsReader(props) {
-  const handleRawData = (data) => parseRawData(data, props.onActsFileLoad);
+  const handleRawData = (data) =>
+    parseRawData(data, props.onActsFileLoad, props.onActsFileError);
 
   return (
     <Stack gap={2} className="mx-auto">
@@ -30,9 +31,9 @@ function ActsReader(props) {
         </span>
       </CSVReader>
       <Container>
-      <Row className="justify-content-md-center">
+        <Row className="justify-content-md-center">
           <Col md="auto" className="text-secondary">
-          or
+            or
           </Col>
         </Row>
       </Container>
@@ -56,17 +57,17 @@ function ActsReader(props) {
 
 export default ActsReader;
 
-function loadExample(onComplete, OnError) {
+function loadExample(onComplete, onError) {
   readRemoteFile("bork.acts", {
     delimiter: " ",
     dynamicTyping: true,
     skipEmptyLines: false,
-    complete: (results) => parseRawData(results.data, onComplete),
-    error: (err) => console.error(err),
+    complete: (results) => parseRawData(results.data, onComplete, onError),
+    error: (err) => onError(err),
   });
 }
 
-function parseRawData(data, onComplete) {
+function parseRawData(data, onComplete, onError) {
   let actsData = {
     namingThreshold: undefined,
     maxCycle: 0,
@@ -78,16 +79,16 @@ function parseRawData(data, onComplete) {
     totals: [],
   };
 
-  data.forEach((row, index) => {
-    const data = Object.prototype.toString.call(row) === "[object Array]" ? row : row.data;
+  let errorEncountered = false;
+
+  data.every((row, index) => {
+    const data =
+      Object.prototype.toString.call(row) === "[object Array]" ? row : row.data;
 
     // Skip empty lines
-    if (data === null || data.every((elt) => elt === null)) return;
+    if (data === null || data.every((elt) => elt === null)) return true;
 
-    if (
-      typeof data[0] === "string" &&
-      (data[0] === "#" || data[0] === ";")
-    )
+    if (typeof data[0] === "string" && (data[0] === "#" || data[0] === ";"))
       handleComment(actsData, data, index);
     else if (
       typeof data[0] === "string" &&
@@ -105,12 +106,26 @@ function parseRawData(data, onComplete) {
       data[1].startsWith("Cycle")
     )
       handleOldStyleTotalLine(actsData, data, index);
-    else notHandled(data, index);
+    else {
+      notHandled(data, index);
+      const err = {
+        row: index,
+        message: "line format not recognised",
+      };
+      onError(err);
+      errorEncountered = true;
+      return false;
+    }
+
+    return true;
   });
 
-  tidy(actsData);
-
-  onComplete(actsData);
+  if (errorEncountered) {
+    onComplete();
+  } else {
+    tidy(actsData);
+    onComplete(actsData);
+  }
 }
 
 function handleComment(actsData, data, index) {
