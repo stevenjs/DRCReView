@@ -58,7 +58,7 @@ function ActsReader(props) {
 export default ActsReader;
 
 function loadExample(onComplete, onError) {
-  readRemoteFile("bork.acts", {
+  readRemoteFile(process.env.PUBLIC_URL + "/bork.acts", {
     delimiter: " ",
     dynamicTyping: true,
     skipEmptyLines: false,
