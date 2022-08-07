@@ -8,6 +8,8 @@ import {
   Title,
   Tooltip,
   Legend,
+  ChartOptions,
+  ChartData,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 
@@ -20,8 +22,15 @@ ChartJS.register(
   Legend
 );
 
-function ActsColumnGraph(props) {
-  const options = {
+type ActsColumnGraphProps = {
+  title: string,
+  columns: string[],
+  values: number[],
+  barColour: string
+};
+
+function ActsColumnGraph({ title, columns, values, barColour }: ActsColumnGraphProps): JSX.Element {
+  const options: ChartOptions<'bar'> = {
     responsive: true,
     maintainAspectRatio: false,
     layout: {
@@ -33,16 +42,14 @@ function ActsColumnGraph(props) {
       },
       title: {
         display: true,
-        text: props.title,
+        text: title,
         align: "start",
         font: {
           size: 8,
         },
         padding: {
             top: 0,
-            bottom: 8,
-            left: 10,
-            right: 10
+            bottom: 8
         },
       },
     },
@@ -56,15 +63,15 @@ function ActsColumnGraph(props) {
     },
   };
 
-  const labels = props.columns;
+  const labels = columns;
 
-  const data = {
+  const data: ChartData<'bar'> = {
     labels,
     datasets: [
       {
         label: "Activation",
-        data: props.values,
-        backgroundColor: props.barColour,
+        data: values,
+        backgroundColor: barColour,
       },
     ],
   };

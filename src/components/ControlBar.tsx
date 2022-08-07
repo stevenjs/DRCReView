@@ -12,27 +12,35 @@ import {
   faPause,
 } from "@fortawesome/free-solid-svg-icons";
 
-function ControlBar(props) {
+type ControlBarProps = {
+  maxCycle: number,
+  cycle: number,
+  playing: boolean,
+  setCycle: (cycle: number) => void,
+  playClicked: () => void
+};
+
+function ControlBar({ maxCycle, cycle, playing, setCycle, playClicked } : ControlBarProps): JSX.Element {
   return (
     <Navbar fixed="bottom" variant="dark" bg="dark">
       <Container>
         <ButtonGroup size="sm">
           <Button
-            onClick={() => props.setCycle(1)}
-            disabled={props.cycle === 1}
+            onClick={() => setCycle(1)}
+            disabled={cycle === 1}
           >
             <FontAwesomeIcon icon={faStepBackward} />
           </Button>
-          <Button onClick={() => props.playClicked()}>
-            {props.playing ? (
+          <Button onClick={() => playClicked()}>
+            {playing ? (
               <FontAwesomeIcon icon={faPause} />
             ) : (
               <FontAwesomeIcon icon={faPlay} />
             )}
           </Button>
           <Button
-            onClick={() => props.setCycle(props.maxCycle)}
-            disabled={props.cycle === props.maxCycle}
+            onClick={() => setCycle(maxCycle)}
+            disabled={cycle === maxCycle}
           >
             <FontAwesomeIcon icon={faStepForward} />
           </Button>
@@ -40,30 +48,28 @@ function ControlBar(props) {
         &nbsp;
         <ButtonGroup size="sm">
           <Button
-            onClick={() => props.setCycle(props.cycle - 1)}
-            disabled={props.cycle === 1}
+            onClick={() => setCycle(cycle - 1)}
+            disabled={cycle === 1}
           >
             <FontAwesomeIcon icon={faCaretLeft} />
           </Button>
           <Button
-            onClick={() => props.setCycle(props.cycle + 1)}
-            disabled={props.cycle === props.maxCycle}
+            onClick={() => setCycle(cycle + 1)}
+            disabled={cycle === maxCycle}
           >
             <FontAwesomeIcon icon={faCaretRight} />
           </Button>
         </ButtonGroup>
-        &nbsp;
-        <Navbar.Text className="text-light">{1}</Navbar.Text>
-        &nbsp;
+        &nbsp;&nbsp;
         <Form.Range
           min="1"
-          max={props.maxCycle}
+          max={maxCycle}
           step="1"
-          value={props.cycle}
-          onChange={(e) => props.setCycle(parseInt(e.target.value))}
+          value={cycle}
+          onChange={(e) => setCycle(parseInt(e.target.value))}
         />
         &nbsp;
-        <Navbar.Text className="text-light">{props.maxCycle}</Navbar.Text>
+        <Navbar.Text className="text-light">{cycle}</Navbar.Text>
       </Container>
     </Navbar>
   );

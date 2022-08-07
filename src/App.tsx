@@ -8,7 +8,7 @@ import Tab from "react-bootstrap/Tab";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faChartBar,
+  faChartColumn,
   faUpload,
   faTable,
 } from "@fortawesome/free-solid-svg-icons";
@@ -18,19 +18,20 @@ import TableView from "./components/TableView";
 import ColumnGraphsView from "./components/ColumnGraphsView";
 
 import "./App.css";
+import DRCActivations from "./lib/DRCActivations";
 
-const App = () => {
-  const [tabKey, setTabKey] = useState("load");
-  const [actsError, setActsError] = useState("");
-  const [actsData, setActsData] = useState();
+const App = (): JSX.Element => {
+  const [tabKey, setTabKey] = useState<string>("load");
+  const [actsError, setActsError] = useState<string>("");
+  const [activations, setActivations] = useState<DRCActivations>();
 
-  const onActsFileLoad = (data) => {
-    if (data) clearActsError();
-    setActsData(data);
-    setTabKey(data ? "tables" : "load");
+  const onActsFileLoad = (acts?: DRCActivations) => {
+    if (acts) clearActsError();
+    setActivations(acts);
+    setTabKey(acts ? "columngraphs" : "load");
   };
 
-  const onActsFileError = (err, file, inputElem, reason) => {
+  const onActsFileError = (err: any) => {
     if (err !== null && err !== undefined) {
       let message = "";
       if (typeof err.row !== "undefined") {
@@ -48,7 +49,7 @@ const App = () => {
   };
 
   const onRemoveActsFile = () => {
-    setActsData();
+    setActivations(undefined);
     clearActsError();
     setTabKey("load");
   };
@@ -68,7 +69,7 @@ const App = () => {
         ) : null}
         <Tabs
           activeKey={tabKey}
-          onSelect={(k) => setTabKey(k)}
+          onSelect={(k) => setTabKey(k == null ? "load" : k)}
           className="mb-1"
         >
           <Tab eventKey="load" title={<FontAwesomeIcon icon={faUpload} />}>
@@ -81,18 +82,18 @@ const App = () => {
             </Container>
           </Tab>
           <Tab
-            eventKey="tables"
-            title={<FontAwesomeIcon icon={faTable} />}
-            disabled={!actsData}
+            eventKey="columngraphs"
+            title={<FontAwesomeIcon icon={faChartColumn} />}
+            disabled={!activations}
           >
-            <TableView data={actsData} />
+            <ColumnGraphsView activations={activations} maxCycle={activations?.maxCycle ?? 1} />
           </Tab>
           <Tab
-            eventKey="columngraphs"
-            title={<FontAwesomeIcon icon={faChartBar} />}
-            disabled={!actsData}
+            eventKey="tables"
+            title={<FontAwesomeIcon icon={faTable} />}
+            disabled={!activations}
           >
-            <ColumnGraphsView actsData={actsData} maxCycle={actsData ? actsData.maxCycle : 1} />
+            <TableView activations={activations} />
           </Tab>
         </Tabs>
       </Container>
