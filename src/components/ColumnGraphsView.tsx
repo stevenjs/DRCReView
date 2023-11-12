@@ -14,7 +14,7 @@ type ColumnGraphsViewProps = {
 function ColumnGraphsView({ maxCycle, activations }: ColumnGraphsViewProps): JSX.Element {
   const [cycle, setCycle] = useState<number>(1);
   const [playing, setPlaying] = useState<boolean>(false);
-  const [timer, setTimer] = useState<NodeJS.Timer>();
+  const [timer, setTimer] = useState<NodeJS.Timeout>();
   const [newData, setNewData] = useState<boolean>(false);
 
   const toggleAnimation = useCallback(() => {
