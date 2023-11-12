@@ -50,18 +50,18 @@ function ActsReader({ onActsFileLoad, onActsFileError, onRemoveActsFile }: ActsR
             <Button
               variant="secondary"
               onClick={() => {
-                readRemoteFile(process.env.PUBLIC_URL + "/bork.acts", {
+                readRemoteFile("/bork.acts", {
                   delimiter: " ",
                   dynamicTyping: true,
                   skipEmptyLines: false,
                   download: true,
-                  complete: (results) =>
+                  complete: (results: any) =>
                     parseRawData(
                       results.data,
                       onActsFileLoad,
                       onActsFileError
                     ),
-                  error: (err) => onActsFileError(err),
+                  error: (err: any) => onActsFileError(err),
                 });
               }}
             >
