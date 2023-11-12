@@ -1,3 +1,4 @@
+import { expect, it } from 'vitest';
 import DRCActivations from './DRCActivations';
 
 it('constructs', () => {
