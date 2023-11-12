@@ -50,7 +50,7 @@ function ActsReader({ onActsFileLoad, onActsFileError, onRemoveActsFile }: ActsR
             <Button
               variant="secondary"
               onClick={() => {
-                readRemoteFile("/bork.acts", {
+                readRemoteFile("bork.acts", {
                   delimiter: " ",
                   dynamicTyping: true,
                   skipEmptyLines: false,
