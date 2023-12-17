@@ -68,8 +68,8 @@ function ControlBar({ maxCycle, cycle, playing, setCycle, playClicked } : Contro
           value={cycle}
           onChange={(e) => setCycle(parseInt(e.target.value))}
         />
-        &nbsp;
-        <Navbar.Text className="text-light">{cycle}</Navbar.Text>
+        &nbsp;&nbsp;
+        <Navbar.Text className="text-light">{cycle}&nbsp;/&nbsp;{maxCycle}</Navbar.Text>
       </Container>
     </Navbar>
   );

@@ -5,22 +5,22 @@
   "private": true,
   "homepage": "https://stevenjs.github.io/DRCReView",
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.4.2",
-    "@fortawesome/free-regular-svg-icons": "^6.4.2",
-    "@fortawesome/free-solid-svg-icons": "^6.4.2",
+    "@fortawesome/fontawesome-svg-core": "^6.5.1",
+    "@fortawesome/free-regular-svg-icons": "^6.5.1",
+    "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
-    "@types/node": "^20.9.2",
-    "@types/react": "^18.2.37",
+    "@types/node": "^20.10.4",
+    "@types/react": "^18.2.45",
     "bootstrap": "^5.3.2",
-    "chart.js": "^4.4.0",
+    "chart.js": "^4.4.1",
     "gh-pages": "^6.1.0",
-    "html-react-parser": "^5.0.6",
+    "html-react-parser": "^5.0.7",
     "react": "^18.2.0",
     "react-bootstrap": "^2.9.1",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
     "react-papaparse": "^4.4.0",
-    "typescript": "^5.2.2"
+    "typescript": "^5.3.3"
   },
   "scripts": {
     "start": "vite",
@@ -42,10 +42,10 @@
     ]
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^4.2.0",
-    "@vitest/coverage-v8": "^0.34.6",
-    "jsdom": "^22.1.0",
-    "vite": "^5.0.0",
-    "vitest": "^0.34.6"
+    "@vitejs/plugin-react": "^4.2.1",
+    "@vitest/coverage-v8": "^1.0.4",
+    "jsdom": "^23.0.1",
+    "vite": "^5.0.9",
+    "vitest": "^1.0.4"
   }
 }

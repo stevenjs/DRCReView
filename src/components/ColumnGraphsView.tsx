@@ -60,7 +60,7 @@ function ColumnGraphsView({ maxCycle, activations }: ColumnGraphsViewProps): JSX
     <>
       {activations ? (
         <Stack gap={0}>
-          <div style={{fontSize: 10}} className="text-end">
+          <div style={{fontSize: 11}} className="text-end">
             Cycle {cycle}
           </div>
           {activations.hasLayer("L") ? (

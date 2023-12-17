@@ -9,7 +9,7 @@ import {
   Tooltip,
   Legend,
   ChartOptions,
-  ChartData,
+  ChartData
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 
@@ -45,13 +45,13 @@ function ActsColumnGraph({ title, columns, values, barColour }: ActsColumnGraphP
         text: title,
         align: "start",
         font: {
-          size: 8,
+          size: 11,
         },
         padding: {
-            top: 0,
+            top: 5,
             bottom: 8
         },
-      },
+      }
     },
     scales: {
       y: {
@@ -72,12 +72,14 @@ function ActsColumnGraph({ title, columns, values, barColour }: ActsColumnGraphP
         label: "Activation",
         data: values,
         backgroundColor: barColour,
+        borderWidth: 0,
+        maxBarThickness: 35
       },
     ],
   };
 
   return (
-      <div style={{ height: "12vh", width: "100%" }}>
+      <div style={{ height: "13vh", width: "100%" }}>
         <Bar options={options} data={data} />
       </div>
   );
